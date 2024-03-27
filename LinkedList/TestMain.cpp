@@ -1,9 +1,13 @@
-#include "SinglyLinkedList.hpp"
+#include "SinglyLinkedList/SinglyLinkedList.hpp"
+// #include "DoublyLinkedList/DoublyLinkedList.hpp"
+// #include "DoublyCircularLinkedList/DoublyCircularLinkedList.hpp"
 #include <iostream>
 using namespace std;
 
+typedef SinglyLinkedList<int> List;
+
 static void leaks();
-static void PrintList(const char *title, SinglyLinkedList<int>& list);
+static void PrintList(const char *title, List& list);
 static void CreationAndCopyTest();
 static void PushAndPopTest();
 static void IteratorTest();
@@ -25,16 +29,16 @@ static void CreationAndCopyTest()
 {
 	cout << "========== Creation And Copy Test ==========\n";
 
-	SinglyLinkedList<int> list1;
+	List list1;
 	PrintList("list1", list1);
 
-	SinglyLinkedList<int> list2(5, 10);
+	List list2(5, 10);
 	PrintList("list2", list2);
 
-	SinglyLinkedList<int> list3(list2);
+	List list3(list2);
 	PrintList("list3", list3);
 
-	SinglyLinkedList<int> list4(5, 10);
+	List list4(5, 5);
 	list4 = list2;
 	PrintList("list4", list4);
 
@@ -45,7 +49,7 @@ static void PushAndPopTest()
 {
 	cout << "========== Push And Pop Test ==========\n";
 
-	SinglyLinkedList<int> list(3, 3);
+	List list(3, 3);
 	list.push_front(2);
 	list.push_front(1);
 	PrintList("list after push front", list);
@@ -70,12 +74,12 @@ static void IteratorTest()
 {
 	cout << "========== Iterator Test ==========\n";
 
-	SinglyLinkedList<int> list;
+	List list;
 	for(int i = 1; i <= 10; i++)
 		list.push_back(i);
-
 	PrintList("before value change", list);
-	SinglyLinkedList<int>::Iterator iter;
+
+	List::Iterator iter;
 	for(iter = list.begin(); iter != list.end(); iter++)
 		(*iter) *= 10; // 모든 원소에 10을 곱함
 	PrintList("after value change", list);
@@ -86,13 +90,13 @@ static void IteratorTest()
 static void InsertAndEraseTest()
 {
 	cout << "========== Insert And Erase Test ==========\n";
-	SinglyLinkedList<int> list;
+	List list;
 	list.push_back(1);
 	list.push_back(2);
 	list.push_back(3);
 	PrintList("initial list", list);
 
-	SinglyLinkedList<int>::Iterator iter = list.begin();
+	List::Iterator iter = list.begin();
 	list.insert(iter, 0); // 리스트의 시작에 0 삽입
 	PrintList("after insert 0 at the beginning", list);
 
@@ -115,13 +119,13 @@ static void InsertAndEraseTest()
 	cout << '\n';
 }
 
-static void PrintList(const char *title, SinglyLinkedList<int>& list)
+static void PrintList(const char *title, List& list)
 {
 	cout << "----- " << title << " -----\n";
 	cout << boolalpha << "Is Empty : " << list.empty() << '\n';
 	cout << "count	 : " << list.size() << '\n';
 	cout << "content	 : ";
-	SinglyLinkedList<int>::Iterator iter;
+	List::Iterator iter;
 	for(iter = list.begin(); iter != list.end(); iter++)
 		cout << *iter << ' ';
 	cout << '\n';

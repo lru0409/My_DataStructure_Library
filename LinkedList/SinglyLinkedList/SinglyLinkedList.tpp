@@ -29,8 +29,8 @@ const SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(const SinglyLinkedList
 		for(iter = ref.begin(); iter != ref.end(); iter++)
 			push_back(iter.node_ptr->data);
 		count = ref.size();
-		return *this;
 	}
+	return *this;
 }
 
 template <typename T>
@@ -70,9 +70,9 @@ void SinglyLinkedList<T>::pop_front()
 {
 	if (head == nullptr)
 		return;
-	Node<T> *node = head;
+	Node<T> *del_node = head;
 	head = head->next;
-	delete node;
+	delete del_node;
 	count -= 1;
 }
 
@@ -123,21 +123,17 @@ void SinglyLinkedList<T>::clear()
 		node = node->next;
 		delete del_node;
 	}
-	count = 0;
 	head = nullptr;
+	count = 0;
 }
 
 template <typename T>
 void SinglyLinkedList<T>::insert(const typename SinglyLinkedList<T>::Iterator& pos, const T& data)
 {
 	if (pos.node_ptr == nullptr)
-	{
 		push_back(data);
-	}
-	else if (pos.node_ptr == head || head == nullptr)
-	{
+	else if (pos.node_ptr == head)
 		push_front(data);
-	}
 	else
 	{
 		Node<T> *node = head;
@@ -159,13 +155,9 @@ template <typename T>
 void SinglyLinkedList<T>::erase(const typename SinglyLinkedList<T>::Iterator& pos)
 {
 	if (pos.node_ptr == nullptr)
-	{
 		return;
-	}
 	else if (pos.node_ptr == head)
-	{
 		pop_front();
-	}
 	else
 	{
 		Node<T> *node = head;
