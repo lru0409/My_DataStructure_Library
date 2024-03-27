@@ -11,20 +11,26 @@ template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& ref)
 	: head(nullptr), count(0)
 {
-	typename SinglyLinkedList<T>::Iterator iter;
-	for(iter = ref.begin(); iter != ref.end(); iter++)
-		push_back(iter.node_ptr->data);
+	if (this != &ref)
+	{
+		typename SinglyLinkedList<T>::Iterator iter;
+		for(iter = ref.begin(); iter != ref.end(); iter++)
+			push_back(iter.node_ptr->data);
+	}
 }
 
 template <typename T>
 const SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(const SinglyLinkedList<T>& ref)
 {
-	clear();
-	typename SinglyLinkedList<T>::Iterator iter;
-	for(iter = ref.begin(); iter != ref.end(); iter++)
-		push_back(iter.node_ptr->data);
-	count = ref.size();
-	return *this;
+	if (this != &ref)
+	{
+		clear();
+		typename SinglyLinkedList<T>::Iterator iter;
+		for(iter = ref.begin(); iter != ref.end(); iter++)
+			push_back(iter.node_ptr->data);
+		count = ref.size();
+		return *this;
+	}
 }
 
 template <typename T>
