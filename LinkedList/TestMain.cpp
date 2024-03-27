@@ -18,9 +18,9 @@ int main()
 	// atexit(leaks);
 
 	CreationAndCopyTest();	// 리스트 생성 및 복사 테스트
-	PushAndPopTest();		// 리스트 원소 푸시 및 팝 테스트
+	PushAndPopTest();		// push, pop 테스트
 	IteratorTest();			// 리스트 순회하며 원소 변경하는 테스트
-	InsertAndEraseTest();
+	InsertAndEraseTest();	// insert, erase 테스트
 
 	return 0;
 }

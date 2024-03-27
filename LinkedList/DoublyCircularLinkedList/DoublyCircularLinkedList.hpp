@@ -30,9 +30,11 @@ class DoublyCircularLinkedList
 			friend class DoublyCircularLinkedList<T>;
 			private:
 				Node<T> *node_ptr;
+				Node<T> *head_ptr;
 			public:
-				Iterator() : node_ptr(nullptr) {}
-				Iterator(Node<T> *node_ptr) : node_ptr(node_ptr) {}
+				Iterator() : node_ptr(nullptr), head_ptr(nullptr) {}
+				Iterator(Node<T> *node_ptr, Node<T> *head_ptr)
+					: node_ptr(node_ptr), head_ptr(head_ptr) {}
 
 				T& operator*();
 				Iterator& operator++();

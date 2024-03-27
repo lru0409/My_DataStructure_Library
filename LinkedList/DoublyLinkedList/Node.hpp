@@ -11,8 +11,6 @@ class Node
 		Node<T> *prev;
 		Node<T>	*next;
 
-		Node(const T& data, Node<T> *prev, Node<T> *next) 
-			: data(data), prev(prev), next(next) {}
 		Node(const T& data) : data(data), prev(nullptr), next(nullptr) {}
 };
 

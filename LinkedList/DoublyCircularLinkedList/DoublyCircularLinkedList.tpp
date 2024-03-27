@@ -215,7 +215,12 @@ template <typename T>
 typename DoublyCircularLinkedList<T>::Iterator&  DoublyCircularLinkedList<T>::Iterator::operator++()
 {
 	if (node_ptr != nullptr)
-		node_ptr = node_ptr->next;
+	{
+		if (node_ptr->next == head_ptr)
+			node_ptr = nullptr;
+		else
+			node_ptr = node_ptr->next;
+	}
 	return *this;
 }
 
@@ -224,7 +229,12 @@ typename DoublyCircularLinkedList<T>::Iterator DoublyCircularLinkedList<T>::Iter
 {
 	Iterator temp = *this;
 	if (node_ptr != nullptr)
-		node_ptr = node_ptr->next;
+	{
+		if (node_ptr->next == head_ptr)
+			node_ptr = nullptr;
+		else
+			node_ptr = node_ptr->next;
+	}
 	return temp;
 }
 

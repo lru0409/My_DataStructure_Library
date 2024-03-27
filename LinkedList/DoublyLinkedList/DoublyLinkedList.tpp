@@ -42,28 +42,28 @@ DoublyLinkedList<T>::~DoublyLinkedList()
 template <typename T>
 void DoublyLinkedList<T>::push_front(const T& data)
 {
-	Node<T> *new_node = new Node<T>(data, nullptr, head);
+	Node<T> *new_node = new Node<T>(data);
 	if (head) {
+		new_node->next = head;
 		head->prev = new_node;
-		head = new_node;
 	} else {
-		head = new_node;
 		tail = new_node;
 	}
+	head = new_node;
 	count += 1;
 }
 
 template <typename T>
 void DoublyLinkedList<T>::push_back(const T& data)
 {
-	Node<T> *new_node = new Node<T>(data, tail, nullptr);
-	if (head) {
+	Node<T> *new_node = new Node<T>(data);
+	if (tail) {
+		new_node->prev = tail;
 		tail->next = new_node;
-		tail = new_node;
 	} else {
 		head = new_node;
-		tail = new_node;
 	}
+	tail = new_node;
 	count += 1;
 }
 
@@ -116,10 +116,9 @@ template <typename T>
 void DoublyLinkedList<T>::clear()
 {
 	Node<T> *node = head;
-	Node<T> *del_node;
 	while (node)
 	{
-		del_node = node;
+		Node<T> *del_node = node;
 		node = node->next;
 		delete del_node;
 	}
@@ -142,8 +141,10 @@ void DoublyLinkedList<T>::insert(const typename DoublyLinkedList<T>::Iterator& p
 		{
 			if (node == pos.node_ptr)
 			{
-				Node<T> *new_node = new Node<T>(data, node->prev, node);
+				Node<T> *new_node = new Node<T>(data);
+				new_node->prev = node->prev;
 				node->prev->next = new_node;
+				new_node->next = node;
 				node->prev = new_node;
 				count += 1;
 				break;
