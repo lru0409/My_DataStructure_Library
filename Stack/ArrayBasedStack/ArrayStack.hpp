@@ -1,6 +1,9 @@
 #ifndef ARRAY_STACK
 # define ARRAY_STACK
 
+# include <cstddef>
+# include <stdexcept>
+
 # define STACK_MAX_SIZE 100
 
 template <typename T>
